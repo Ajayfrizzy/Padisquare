@@ -125,55 +125,6 @@ npm run build
 npm start
 ```
 
-## 🔧 Configuration
-
-### Adding New Vendors
-
-Edit `src/lib/data.ts` to add vendors:
-
-```typescript
-export const vendors: Vendor[] = [
-  {
-    slug: 'new-vendor',
-    name: 'New Vendor Name',
-    logo: 'https://example.com/logo.jpg',
-    heroImage: 'https://example.com/hero.jpg',
-    description: 'Vendor description...',
-  },
-  // ... existing vendors
-];
-```
-
-### Adding New Products
-
-```typescript
-export const products: Product[] = [
-  {
-    id: 'unique-id',
-    name: 'Product Name',
-    price: 99.99,
-    image: 'https://example.com/product.jpg',
-    createdAt: '2025-01-15T10:00:00Z',
-    vendorSlug: 'new-vendor', // Must match vendor slug
-  },
-  // ... existing products
-];
-```
-
-### External Images
-
-Add image domains to `next.config.ts`:
-
-```typescript
-images: {
-  remotePatterns: [
-    {
-      protocol: 'https',
-      hostname: 'your-image-domain.com',
-    },
-  ],
-},
-```
 
 ## 📱 Responsive Breakpoints
 
@@ -194,7 +145,7 @@ images: {
 
 Deploy to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+[![Deploy with Vercel]](https://padisquare-indol.vercel.app/)
 
 Or deploy manually:
 
@@ -209,4 +160,4 @@ This project is for demonstration purposes.
 
 ---
 
-Built with ❤️ using Next.js 14+ and TailwindCSS
+Built with using Next.js 14+ and TailwindCSS
