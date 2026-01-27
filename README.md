@@ -2,14 +2,14 @@
 
 A modern, responsive multi-vendor marketplace built with Next.js 14+ App Router and TailwindCSS. Each vendor has their own mini storefront with product listings, search, sorting, and pagination.
 
-## 🚀 Live Demo
+## Live Demo
 
 Visit vendor storefronts at:
 - `/site/techzone` - TechZone Electronics
 - `/site/fashion-hub` - Fashion Hub
 - `/site/home-essentials` - Home Essentials
 
-## ✨ Features
+## Features
 
 - **Dynamic Vendor Pages**: Each vendor has a unique storefront at `/site/[vendorSlug]`
 - **Product Search**: Real-time search filtering by product name
@@ -22,7 +22,7 @@ Visit vendor storefronts at:
 - **SEO Optimized**: Dynamic metadata per vendor using `generateMetadata()`
 - **Accessibility**: ARIA labels, keyboard navigation, and focus management
 
-## 🏗️ Architecture
+## Architecture
 
 ### Project Structure
 
@@ -73,7 +73,7 @@ storefront/
 
 6. **Mock Data Layer**: Data is stored in TypeScript files (`lib/data.ts`) with an API abstraction (`lib/api.ts`) for easy replacement with a real backend.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Framework**: Next.js 14+ (App Router)
 - **Styling**: TailwindCSS
@@ -81,7 +81,7 @@ storefront/
 - **Icons**: Heroicons
 - **Images**: Next.js Image Optimization
 
-## 🎨 Brand Customization
+## Brand Customization
 
 The primary brand color `#159C47` is used throughout the application:
 - Primary buttons and CTAs
@@ -92,7 +92,7 @@ To customize, update the hex values in:
 - Component Tailwind classes (search for `#159C47`)
 - CSS custom properties in `globals.css`
 
-## 📦 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -126,13 +126,13 @@ npm start
 ```
 
 
-## 📱 Responsive Breakpoints
+## Responsive Breakpoints
 
 - **Mobile**: < 640px
 - **Tablet**: 640px - 1024px
 - **Desktop**: > 1024px
 
-## ♿ Accessibility
+## Accessibility
 
 - Semantic HTML elements
 - ARIA labels and roles
@@ -141,11 +141,11 @@ npm start
 - Screen reader friendly
 - Color contrast compliance
 
-## 🚀 Deployment
+## Deployment
 
 Deploy to Vercel with one click:
 
-[![Deploy with Vercel]](https://padisquare-indol.vercel.app/)
+[![Deploy with Vercel](https://vercel.com/button)](https://padisquare-indol.vercel.app/)
 
 Or deploy manually:
 
@@ -154,7 +154,7 @@ npm run build
 npm start
 ```
 
-## 📄 License
+## License
 
 This project is for demonstration purposes.
 
