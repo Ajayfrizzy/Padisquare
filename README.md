@@ -1,36 +1,212 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Multi-Vendor Storefront
 
-## Getting Started
+A modern, responsive multi-vendor marketplace built with Next.js 14+ App Router and TailwindCSS. Each vendor has their own mini storefront with product listings, search, sorting, and pagination.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Visit vendor storefronts at:
+- `/site/techzone` - TechZone Electronics
+- `/site/fashion-hub` - Fashion Hub
+- `/site/home-essentials` - Home Essentials
+
+## ✨ Features
+
+- **Dynamic Vendor Pages**: Each vendor has a unique storefront at `/site/[vendorSlug]`
+- **Product Search**: Real-time search filtering by product name
+- **Sorting Options**: Sort by price (low to high, high to low) or most recent
+- **Pagination**: Navigate through products with page controls
+- **Responsive Design**: Fully responsive layout for all screen sizes
+- **Dark Mode Support**: Automatic dark mode based on system preferences
+- **Loading States**: Skeleton loading for better UX
+- **Error Handling**: User-friendly error and 404 pages
+- **SEO Optimized**: Dynamic metadata per vendor using `generateMetadata()`
+- **Accessibility**: ARIA labels, keyboard navigation, and focus management
+
+## 🏗️ Architecture
+
+### Project Structure
+
+```
+storefront/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── products/[vendorSlug]/route.ts  # Product API endpoint
+│   │   ├── site/[vendorSlug]/
+│   │   │   ├── page.tsx          # Vendor page (Server Component)
+│   │   │   ├── loading.tsx       # Loading state
+│   │   │   ├── error.tsx         # Error boundary
+│   │   │   └── not-found.tsx     # 404 page
+│   │   ├── layout.tsx            # Root layout
+│   │   ├── page.tsx              # Homepage
+│   │   └── globals.css           # Global styles
+│   ├── components/
+│   │   ├── ProductCard.tsx       # Product display card
+│   │   ├── ProductGrid.tsx       # Product grid with filters (Client)
+│   │   ├── SearchBar.tsx         # Search input (Client)
+│   │   ├── SortSelect.tsx        # Sort dropdown (Client)
+│   │   ├── Pagination.tsx        # Page navigation (Client)
+│   │   ├── VendorHero.tsx        # Vendor header section
+│   │   ├── EmptyState.tsx        # No results display
+│   │   ├── Skeletons.tsx         # Loading skeletons
+│   │   └── index.ts              # Component exports
+│   └── lib/
+│       ├── types.ts              # TypeScript interfaces
+│       ├── data.ts               # Mock data (vendors & products)
+│       └── api.ts                # Data fetching functions
+├── next.config.ts                # Next.js configuration
+├── tailwind.config.ts            # TailwindCSS configuration
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Architecture Decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Server Components by Default**: The vendor page and hero section are Server Components for optimal performance and SEO. Data is fetched on the server and passed to client components.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Client Components for Interactivity**: Search, sort, and pagination use Client Components (`'use client'`) since they require user interaction and state management.
 
-## Learn More
+3. **URL-Based State Management**: Filter state (search, sort, page) is stored in URL search params for shareability and browser history support.
 
-To learn more about Next.js, take a look at the following resources:
+4. **API Routes for Client-Side Filtering**: An API route (`/api/products/[vendorSlug]`) enables client-side filtering without full page reloads.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **ISR (Incremental Static Regeneration)**: Pages are revalidated every 60 seconds for a balance between performance and freshness.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+6. **Mock Data Layer**: Data is stored in TypeScript files (`lib/data.ts`) with an API abstraction (`lib/api.ts`) for easy replacement with a real backend.
 
-## Deploy on Vercel
+## 🛠️ Technology Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework**: Next.js 14+ (App Router)
+- **Styling**: TailwindCSS
+- **Language**: TypeScript
+- **Icons**: Heroicons
+- **Images**: Next.js Image Optimization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Brand Customization
+
+The primary brand color `#159C47` is used throughout the application:
+- Primary buttons and CTAs
+- Active states and focus rings
+- Accent text and badges
+
+To customize, update the hex values in:
+- Component Tailwind classes (search for `#159C47`)
+- CSS custom properties in `globals.css`
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node.js 18.17 or later
+- npm, yarn, or pnpm
+
+### Installation
+
+```bash
+# Navigate to the project directory
+cd storefront
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the homepage, then navigate to a vendor page:
+- [http://localhost:3000/site/techzone](http://localhost:3000/site/techzone)
+
+### Build for Production
+
+```bash
+# Create production build
+npm run build
+
+# Start production server
+npm start
+```
+
+## 🔧 Configuration
+
+### Adding New Vendors
+
+Edit `src/lib/data.ts` to add vendors:
+
+```typescript
+export const vendors: Vendor[] = [
+  {
+    slug: 'new-vendor',
+    name: 'New Vendor Name',
+    logo: 'https://example.com/logo.jpg',
+    heroImage: 'https://example.com/hero.jpg',
+    description: 'Vendor description...',
+  },
+  // ... existing vendors
+];
+```
+
+### Adding New Products
+
+```typescript
+export const products: Product[] = [
+  {
+    id: 'unique-id',
+    name: 'Product Name',
+    price: 99.99,
+    image: 'https://example.com/product.jpg',
+    createdAt: '2025-01-15T10:00:00Z',
+    vendorSlug: 'new-vendor', // Must match vendor slug
+  },
+  // ... existing products
+];
+```
+
+### External Images
+
+Add image domains to `next.config.ts`:
+
+```typescript
+images: {
+  remotePatterns: [
+    {
+      protocol: 'https',
+      hostname: 'your-image-domain.com',
+    },
+  ],
+},
+```
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
+
+## ♿ Accessibility
+
+- Semantic HTML elements
+- ARIA labels and roles
+- Focus visible indicators
+- Keyboard navigation support
+- Screen reader friendly
+- Color contrast compliance
+
+## 🚀 Deployment
+
+Deploy to Vercel with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+Or deploy manually:
+
+```bash
+npm run build
+npm start
+```
+
+## 📄 License
+
+This project is for demonstration purposes.
+
+---
+
+Built with ❤️ using Next.js 14+ and TailwindCSS
