@@ -1,4 +1,3 @@
-import { Vendor, Product, ProductFilters, PaginatedResponse } from './types';
 import { vendors, products, getVendorBySlug, getProductsByVendor } from './data';
 
 // Simulated network delay for realistic loading states
@@ -7,14 +6,14 @@ const SIMULATED_DELAY = 300;
 /**
  * Simulates an API call with optional delay
  */
-async function simulateDelay(): Promise<void> {
+async function simulateDelay() {
   await new Promise((resolve) => setTimeout(resolve, SIMULATED_DELAY));
 }
 
 /**
  * Fetches a vendor by their slug
  */
-export async function fetchVendor(slug: string): Promise<Vendor | null> {
+export async function fetchVendor(slug) {
   await simulateDelay();
   
   const vendor = getVendorBySlug(slug);
@@ -24,7 +23,7 @@ export async function fetchVendor(slug: string): Promise<Vendor | null> {
 /**
  * Fetches all vendors
  */
-export async function fetchAllVendors(): Promise<Vendor[]> {
+export async function fetchAllVendors() {
   await simulateDelay();
   return vendors;
 }
@@ -32,14 +31,11 @@ export async function fetchAllVendors(): Promise<Vendor[]> {
 /**
  * Fetches products for a vendor with filtering, sorting, and pagination
  * 
- * @param vendorSlug - The vendor's unique slug
- * @param filters - Object containing search, sort, page, and limit options
+ * @param {string} vendorSlug - The vendor's unique slug
+ * @param {Object} filters - Object containing search, sort, page, and limit options
  * @returns Paginated response with products and metadata
  */
-export async function fetchProducts(
-  vendorSlug: string,
-  filters: ProductFilters = {}
-): Promise<PaginatedResponse<Product>> {
+export async function fetchProducts(vendorSlug, filters = {}) {
   await simulateDelay();
   
   const { search = '', sort = 'recent', page = 1, limit = 8 } = filters;
@@ -79,7 +75,7 @@ export async function fetchProducts(
 /**
  * Sorts products based on the specified sort option
  */
-function sortProducts(products: Product[], sort: string): Product[] {
+function sortProducts(products, sort) {
   const sorted = [...products];
   
   switch (sort) {
@@ -98,7 +94,7 @@ function sortProducts(products: Product[], sort: string): Product[] {
 /**
  * Fetches a single product by ID
  */
-export async function fetchProductById(productId: string): Promise<Product | null> {
+export async function fetchProductById(productId) {
   await simulateDelay();
   
   const product = products.find((p) => p.id === productId);

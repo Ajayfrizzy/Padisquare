@@ -1,15 +1,10 @@
 import Image from 'next/image';
-import { Product } from '@/lib/types';
-
-interface ProductCardProps {
-  product: Product;
-}
 
 /**
  * ProductCard component displays a single product with image, name, and price.
  * Fully responsive with hover effects.
  */
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }) {
   return (
     <article
       className="group bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg 

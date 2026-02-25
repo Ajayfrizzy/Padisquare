@@ -3,25 +3,14 @@
 import { useCallback, useTransition } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
-interface SortOption {
-  value: string;
-  label: string;
-}
-
-interface SortSelectProps {
-  options: SortOption[];
-  value: string;
-  onChange: (value: string) => void;
-}
-
 /**
  * SortSelect component for product sorting options.
  * Client component for interactivity.
  */
-export default function SortSelect({ options, value, onChange }: SortSelectProps) {
+export default function SortSelect({ options, value, onChange }) {
   const [isPending, startTransition] = useTransition();
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = useCallback((e) => {
     startTransition(() => {
       onChange(e.target.value);
     });

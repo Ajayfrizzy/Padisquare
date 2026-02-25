@@ -1,28 +1,14 @@
 import { Suspense } from 'react';
-import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { fetchVendor, fetchProducts } from '@/lib/api';
 import { VendorHero, ProductGrid } from '@/components';
 import { ProductGridSkeleton, FilterBarSkeleton } from '@/components/Skeletons';
-import { SortOption } from '@/lib/types';
-
-// Props interface for the page component
-interface VendorPageProps {
-  params: Promise<{
-    vendorSlug: string;
-  }>;
-  searchParams: Promise<{
-    search?: string;
-    sort?: SortOption;
-    page?: string;
-  }>;
-}
 
 /**
  * Generate dynamic metadata for SEO based on vendor information.
  * This runs on the server and provides unique meta tags per vendor.
  */
-export async function generateMetadata({ params }: VendorPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }) {
   const { vendorSlug } = await params;
   const vendor = await fetchVendor(vendorSlug);
   
@@ -69,7 +55,7 @@ export async function generateMetadata({ params }: VendorPageProps): Promise<Met
  * - SEO metadata generation
  * - Suspense boundaries for progressive loading
  */
-export default async function VendorPage({ params, searchParams }: VendorPageProps) {
+export default async function VendorPage({ params, searchParams }) {
   const { vendorSlug } = await params;
   const resolvedSearchParams = await searchParams;
   

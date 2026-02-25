@@ -1,11 +1,5 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-interface EmptyStateProps {
-  title?: string;
-  message?: string;
-  showIcon?: boolean;
-}
-
 /**
  * EmptyState component displayed when no products match the search/filter criteria.
  * Server component - no interactivity needed.
@@ -14,7 +8,7 @@ export default function EmptyState({
   title = 'No products found',
   message = 'Try adjusting your search or filter to find what you\'re looking for.',
   showIcon = true
-}: EmptyStateProps) {
+}) {
   return (
     <div 
       className="flex flex-col items-center justify-center py-16 px-4 text-center"

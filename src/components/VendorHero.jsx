@@ -1,15 +1,10 @@
 import Image from 'next/image';
-import { Vendor } from '@/lib/types';
-
-interface VendorHeroProps {
-  vendor: Vendor;
-}
 
 /**
  * VendorHero component displays the vendor's hero image, logo, and name.
  * Server component - no interactivity needed.
  */
-export default function VendorHero({ vendor }: VendorHeroProps) {
+export default function VendorHero({ vendor }) {
   return (
     <header className="mb-8">
       {/* Hero Image with overlay */}

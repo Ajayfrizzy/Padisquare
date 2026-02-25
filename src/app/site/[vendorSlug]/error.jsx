@@ -3,17 +3,12 @@
 import { useEffect } from 'react';
 import { ExclamationTriangleIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
-interface ErrorProps {
-  error: Error & { digest?: string };
-  reset: () => void;
-}
-
 /**
  * Error boundary component for the vendor page.
  * Displayed automatically by Next.js when an error occurs.
  * Provides user-friendly error message and retry option.
  */
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error, reset }) {
   useEffect(() => {
     // Log the error to an error reporting service
     console.error('Vendor page error:', error);

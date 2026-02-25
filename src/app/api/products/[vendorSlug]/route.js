@@ -1,6 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { fetchProducts } from '@/lib/api';
-import { SortOption } from '@/lib/types';
 
 /**
  * API Route for fetching products by vendor with filtering, sorting, and pagination.
@@ -8,17 +7,14 @@ import { SortOption } from '@/lib/types';
  * 
  * GET /api/products/[vendorSlug]?search=query&sort=price-asc&page=1
  */
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ vendorSlug: string }> }
-) {
+export async function GET(request, { params }) {
   try {
     const { vendorSlug } = await params;
     const searchParams = request.nextUrl.searchParams;
     
     // Parse query parameters
     const search = searchParams.get('search') || '';
-    const sort = (searchParams.get('sort') as SortOption) || 'recent';
+    const sort = searchParams.get('sort') || 'recent';
     const page = parseInt(searchParams.get('page') || '1', 10);
     const limit = parseInt(searchParams.get('limit') || '8', 10);
     

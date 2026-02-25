@@ -3,12 +3,6 @@
 import { useCallback, useState, useTransition } from 'react';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-interface SearchBarProps {
-  defaultValue?: string;
-  onSearch: (query: string) => void;
-  placeholder?: string;
-}
-
 /**
  * SearchBar component with debounced input and clear functionality.
  * Client component for interactivity.
@@ -17,11 +11,11 @@ export default function SearchBar({
   defaultValue = '', 
   onSearch, 
   placeholder = 'Search products...' 
-}: SearchBarProps) {
+}) {
   const [value, setValue] = useState(defaultValue);
   const [isPending, startTransition] = useTransition();
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e) => {
     const newValue = e.target.value;
     setValue(newValue);
     
@@ -38,7 +32,7 @@ export default function SearchBar({
     });
   }, [onSearch]);
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     onSearch(value);
   }, [onSearch, value]);

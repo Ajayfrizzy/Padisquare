@@ -8,27 +8,21 @@ import SortSelect from './SortSelect';
 import Pagination from './Pagination';
 import EmptyState from './EmptyState';
 import { ProductGridSkeleton } from './Skeletons';
-import { Product, SortOption, PaginatedResponse } from '@/lib/types';
 import { getSortOptions } from '@/lib/api';
-
-interface ProductGridProps {
-  initialData: PaginatedResponse<Product>;
-  vendorSlug: string;
-}
 
 /**
  * ProductGrid component with search, sort, and pagination.
  * Client component to handle user interactions and URL state management.
  * Uses URL search params for shareable filter states.
  */
-export default function ProductGrid({ initialData, vendorSlug }: ProductGridProps) {
+export default function ProductGrid({ initialData, vendorSlug }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   
   // Initialize state from URL params or defaults
-  const [products, setProducts] = useState<Product[]>(initialData.data);
+  const [products, setProducts] = useState(initialData.data);
   const [pagination, setPagination] = useState({
     total: initialData.total,
     page: initialData.page,
@@ -37,7 +31,7 @@ export default function ProductGrid({ initialData, vendorSlug }: ProductGridProp
   
   // Get current filter values from URL
   const currentSearch = searchParams.get('search') || '';
-  const currentSort = (searchParams.get('sort') as SortOption) || 'recent';
+  const currentSort = searchParams.get('sort') || 'recent';
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   
   const sortOptions = getSortOptions();
@@ -46,7 +40,7 @@ export default function ProductGrid({ initialData, vendorSlug }: ProductGridProp
    * Updates URL search params and triggers data refetch
    * This approach keeps filter state in the URL for shareability
    */
-  const updateFilters = useCallback((updates: Record<string, string | number | null>) => {
+  const updateFilters = useCallback((updates) => {
     const params = new URLSearchParams(searchParams.toString());
     
     Object.entries(updates).forEach(([key, value]) => {
@@ -63,17 +57,17 @@ export default function ProductGrid({ initialData, vendorSlug }: ProductGridProp
   }, [searchParams, pathname, router]);
 
   // Handle search
-  const handleSearch = useCallback((query: string) => {
+  const handleSearch = useCallback((query) => {
     updateFilters({ search: query, page: 1 }); // Reset to page 1 on new search
   }, [updateFilters]);
 
   // Handle sort change
-  const handleSortChange = useCallback((sort: string) => {
+  const handleSortChange = useCallback((sort) => {
     updateFilters({ sort, page: 1 }); // Reset to page 1 on sort change
   }, [updateFilters]);
 
   // Handle page change
-  const handlePageChange = useCallback((page: number) => {
+  const handlePageChange = useCallback((page) => {
     updateFilters({ page });
     // Scroll to top of product grid
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -95,7 +89,7 @@ export default function ProductGrid({ initialData, vendorSlug }: ProductGridProp
           throw new Error('Failed to fetch products');
         }
         
-        const data: PaginatedResponse<Product> = await response.json();
+        const data = await response.json();
         setProducts(data.data);
         setPagination({
           total: data.total,

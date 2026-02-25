@@ -3,17 +3,11 @@
 import { useCallback } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
-
 /**
  * Pagination component with previous/next buttons and page numbers.
  * Shows ellipsis for large page counts.
  */
-export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export default function Pagination({ currentPage, totalPages, onPageChange }) {
   // Don't render if there's only one page or no pages
   if (totalPages <= 1) return null;
 
@@ -29,9 +23,9 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
     }
   }, [currentPage, totalPages, onPageChange]);
 
-  // Ppage numbers to display
-  const getPageNumbers = (): (number | string)[] => {
-    const pages: (number | string)[] = [];
+  // Page numbers to display
+  const getPageNumbers = () => {
+    const pages = [];
     const maxVisiblePages = 5;
 
     if (totalPages <= maxVisiblePages) {

@@ -1,7 +1,5 @@
-import { Vendor, Product } from './types';
-
 // Mock vendor data with realistic placeholder images with duplicates so that we have more entries
-export const vendors: Vendor[] = [
+export const vendors = [
   {
     slug: 'techzone',
     name: 'TechZone Electronics',
@@ -47,7 +45,7 @@ export const vendors: Vendor[] = [
 ];
 
 // Mock products for each vendor
-export const products: Product[] = [
+export const products = [
   // TechZone Electronics products
   {
     id: 'tech-1',
@@ -461,11 +459,11 @@ export const products: Product[] = [
 ];
 
 // Helper function to get vendor by slug
-export function getVendorBySlug(slug: string): Vendor | undefined {
+export function getVendorBySlug(slug) {
   return vendors.find((v) => v.slug === slug);
 }
 
 // Helper function to get products by vendor
-export function getProductsByVendor(vendorSlug: string): Product[] {
+export function getProductsByVendor(vendorSlug) {
   return products.filter((p) => p.vendorSlug === vendorSlug);
 }
