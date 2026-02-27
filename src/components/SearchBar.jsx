@@ -78,13 +78,13 @@ export default function SearchBar({
                        transition-colors"
             aria-label="Clear search"
           >
-            <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+            {/* <XMarkIcon className="h-5 w-5" aria-hidden="true" /> */}
           </button>
         )}
         
         {/* Loading indicator */}
         {isPending && (
-          <div className="absolute inset-y-0 right-8 flex items-center pr-2">
+          <div className="absolute inset-y-0 right-2 flex items-center pr-2">
             <div className="h-4 w-4 border-2 border-[#159C47] border-t-transparent rounded-full animate-spin" />
           </div>
         )}
